@@ -5,3 +5,5 @@ Online version of [apple chess](https://csstationery.com/fun-four-chain-chess-ga
 Powered by [ts-liveview](https://github.com/beenotung/ts-liveview/blob/v4/README.md)
 
 Developed during the Tecky live-hack session co-hosted with [Alex](https://tecky.io/en/about-us/).
+
+![screenshot](screenshot.png)
