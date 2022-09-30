@@ -144,12 +144,16 @@ let style = Style(/* css */ `
   align-items: center;
   width: 50px;
   height: 50px;
+  max-width: 11vw;
+  max-height: 11vw;
 }
 .cell {
   border: 1px solid black;
   border-radius: 100%;
   width: 40px;
   height: 40px;
+  max-width: 8vw;
+  max-height: 8vw;
   display: inline-flex;
   justify-content: center;
   align-items: center;
