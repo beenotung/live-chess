@@ -130,6 +130,8 @@ let style = Style(/* css */ `
 .board {
   border: 1px solid black;
   display: inline-block;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 .row {
   border: 1px solid black;
@@ -214,6 +216,7 @@ let Home = (): VElement => {
               </div>
             ))}
           </div>
+          <SourceCode page='home.tsx'/>
         </div>
       </>,
     ],
