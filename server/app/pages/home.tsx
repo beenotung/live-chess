@@ -40,7 +40,7 @@ function handleCellClick(attrs: {}, context: Context): Node {
     throw EarlyTerminate
   }
   let board = getBoard()
-  let winner = findWinner(board, 'red') || findWinner(board, 'yellow')
+  let winner = findWinner(board, x, y)
   if (winner) {
     sendMessage(['update-in', '#winner-box', Winner({ player: currentPlayer })])
     throw EarlyTerminate
@@ -66,7 +66,7 @@ function handleCellClick(attrs: {}, context: Context): Node {
 
   // check winner
   board[y][x] = currentPlayer
-  if (findWinner(board, currentPlayer)) {
+  if (findWinner(board, x, y)) {
     sendMessage(['update-in', '#winner-box', Winner({ player: currentPlayer })])
     throw EarlyTerminate
   }
@@ -85,38 +85,82 @@ function handleCellClick(attrs: {}, context: Context): Node {
   throw EarlyTerminate
 }
 
-function findWinner(board: Cell[][], player: Player) {
-  let acc = 0
+// [x,y][][]
+let masks = [
+  /* down */
+  [
+    [0, +1],
+    [0, +2],
+    [0, +3],
+  ],
+  /* up */
+  [
+    [0, -1],
+    [0, -2],
+    [0, -3],
+  ],
+  /* right */
+  [
+    [+1, 0],
+    [+2, 0],
+    [+3, 0],
+  ],
+  /* left */
+  [
+    [-1, 0],
+    [-2, 0],
+    [-3, 0],
+  ],
+  /* \ direction */
+  [
+    [+1, +1],
+    [+2, +2],
+    [+3, +3],
+  ],
+  [
+    [-1, -1],
+    [-2, -2],
+    [-3, -3],
+  ],
+  /* / direction */
+  [
+    [-1, +1],
+    [-2, +2],
+    [-3, +3],
+  ],
+  [
+    [+1, -1],
+    [+2, -2],
+    [+3, -3],
+  ],
+]
 
-  // check in x-direction
+function findWinner(board: Cell[][], cx: number, cy: number): Player | null {
+  let player = board[cy][cx]
+  if (player === 'empty') return null
+
+  for (let mask of masks) {
+    let acc = 0
+    for (let [dx, dy] of mask) {
+      let x = cx + dx
+      let y = cy + dy
+      if (board[y]?.[x] != player) break
+      acc++
+    }
+    if (acc === 3) return player
+  }
+
+  return null
+}
+
+function findAnyWinner(board: Cell[][]): Player | null {
   for (let y = 0; y < Y; y++) {
-    acc = 0
     for (let x = 0; x < X; x++) {
-      if (board[y][x] === player) {
-        acc++
-        if (acc >= 4) {
-          return player
-        }
-      } else {
-        acc = 0
-      }
+      let winner = findWinner(board, x, y)
+      if (winner) return winner
     }
   }
-
-  // check in y-direction
-  for (let x = 0; x < X; x++) {
-    acc = 0
-    for (let y = 0; y < Y; y++) {
-      if (board[y][x] === player) {
-        acc++
-        if (acc >= 4) {
-          return player
-        }
-      } else {
-        acc = 0
-      }
-    }
-  }
+  return null
 }
 
 function handleBoardReset(attrs: {}, context: Context) {
@@ -174,7 +218,7 @@ let style = Style(/* css */ `
 
 let Home = (): VElement => {
   let board = getBoard()
-  let winner = findWinner(board, 'red') || findWinner(board, 'yellow')
+  let winner = findAnyWinner(board)
   return [
     '#home',
     {},
