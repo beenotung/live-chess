@@ -40,7 +40,7 @@ function handleCellClick(attrs: {}, context: Context): Node {
     throw EarlyTerminate
   }
   let board = getBoard()
-  let winner = findWinner(board, x, y)
+  let winner = findAnyWinner(board)
   if (winner) {
     sendMessage(['update-in', '#winner-box', Winner({ player: currentPlayer })])
     throw EarlyTerminate
