@@ -216,7 +216,7 @@ let Home = (): VElement => {
               </div>
             ))}
           </div>
-          <SourceCode page='home.tsx'/>
+          <SourceCode page="home.tsx" />
         </div>
       </>,
     ],
