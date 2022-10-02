@@ -66,7 +66,7 @@ function handleCellClick(attrs: {}, context: Context): Node {
 
   // check winner
   board[y][x] = currentPlayer
-  if (findWinner(board, x, y)) {
+  if (findAnyWinner(board)) {
     sendMessage(['update-in', '#winner-box', Winner({ player: currentPlayer })])
     throw EarlyTerminate
   }
@@ -135,7 +135,7 @@ let masks = [
   ],
 ]
 
-function findWinner(board: Cell[][], cx: number, cy: number): Player | null {
+function findWinnerHelper(board: Cell[][], cx: number, cy: number): Player | null {
   let player = board[cy][cx]
   if (player === 'empty') return null
 
@@ -156,7 +156,7 @@ function findWinner(board: Cell[][], cx: number, cy: number): Player | null {
 function findAnyWinner(board: Cell[][]): Player | null {
   for (let y = 0; y < Y; y++) {
     for (let x = 0; x < X; x++) {
-      let winner = findWinner(board, x, y)
+      let winner = findWinnerHelper(board, x, y)
       if (winner) return winner
     }
   }
