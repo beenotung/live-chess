@@ -1,7 +1,5 @@
 import { Link } from '../components/router.js'
 import { o } from '../jsx/jsx.js'
-import { prerender } from '../jsx/html.js'
-import Comment from '../components/comment.js'
 import SourceCode from '../components/source-code.js'
 import { mapArray } from '../components/fragment.js'
 import { Style } from '../components/style.js'
@@ -229,7 +227,5 @@ let Winner = (attrs: { player: Player }) => {
     </span>
   )
 }
-
-// And it can be pre-rendered into html as well
 
 export default { Index: Home, handleCellClick, handleBoardReset }
