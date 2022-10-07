@@ -26,4 +26,5 @@ export function getBoard() {
 
 export function resetBoard() {
   proxy.cell.length = 0
+  delete proxy.cell[0]
 }
