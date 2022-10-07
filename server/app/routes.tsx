@@ -6,18 +6,13 @@ import type { DynamicContext } from './context'
 import { o } from './jsx/jsx.js'
 import type { Node } from './jsx/types'
 import About, { License } from './pages/about.js'
-import AutoCompleteDemo from './pages/auto-complete-demo.js'
-import Calculator from './pages/calculator.js'
 import UserAgents from './pages/user-agents.js'
 import Chatroom from './pages/chatroom.js'
 import DemoCookieSession from './pages/demo-cookie-session.js'
 import DemoForm from './pages/demo-form.js'
-import Editor from './pages/editor.js'
 import Home from './pages/home.js'
 import NotMatch from './pages/not-match.js'
-import Thermostat from './pages/thermostat.js'
 import { then } from '@beenotung/tslib/result.js'
-import Clock from './pages/clock.js'
 
 let titles: Record<string, string> = {}
 
@@ -85,44 +80,15 @@ let routeDict: Record<string, PageRoute> = {
     description: 'API Route to reset the board',
     node: [Home.handleBoardReset],
   },
-  // '/about/:mode?': {
-  //   title: title('About'),
-  //   description:
-  //     'About ts-liveview - a server-side rendering realtime webapp framework with progressive enhancement',
-  //   menuText: 'About',
-  //   menuUrl: '/about',
-  //   node: About,
-  //   streaming: true,
-  // },
-  // '/thermostat': {
-  //   resolve: Thermostat.index,
-  //   menuText: 'Thermostat',
-  // },
-  // '/thermostat/inc': {
-  //   title: title('Thermostat'),
-  //   description:
-  //     'API endpoint to increase target temperature of the demo thermostat',
-  //   node: [Thermostat.inc],
-  // },
-  // '/thermostat/dec': {
-  //   title: title('Thermostat'),
-  //   description:
-  //     'API endpoint to decrease target temperature of the demo thermostat',
-  //   node: [Thermostat.dec],
-  // },
-  // '/editor': {
-  //   title: title('Image Editor'),
-  //   description:
-  //     'Image Editor that works without javascript, with progress enhancement when javascript and websocket are available',
-  //   menuText: 'Editor',
-  //   node: <Editor />,
-  // },
-  // '/auto-complete': {
-  //   title: title('Auto Complete'),
-  //   description: 'Server-driven auto-complete input box demo',
-  //   menuText: 'Auto Complete',
-  //   node: <AutoCompleteDemo />,
-  // },
+  '/about/:mode?': {
+    title: title('About'),
+    description:
+      'About live-chess - demo apple chess game of ts-liveview: a server-side rendering realtime webapp framework with progressive enhancement',
+    menuText: 'About',
+    menuUrl: '/about',
+    node: About,
+    streaming: true,
+  },
   // '/form': {
   //   title: title('Form'),
   //   description: 'Demonstrate form handling with ts-liveview',
@@ -151,13 +117,6 @@ let routeDict: Record<string, PageRoute> = {
   //   menuText: 'Chatroom',
   //   node: <Chatroom.index />,
   // },
-  // '/clock': {
-  //   title: title('Clock'),
-  //   description:
-  //     'Realtime clock using system time localized with client language and timezone',
-  //   menuText: 'Clock',
-  //   node: Clock,
-  // },
   // '/chatroom/typing': {
   //   title: title('Chatroom Typing'),
   //   description: 'API endpoint to declare typing status in chatroom',
@@ -172,12 +131,6 @@ let routeDict: Record<string, PageRoute> = {
   //   title: title('Chatroom: send message'),
   //   description: 'API endpoint to send message in chatroom',
   //   node: <Chatroom.send />,
-  // },
-  // '/calculator': {
-  //   title: title('Calculator'),
-  //   description: 'A simple stateful component demo',
-  //   menuText: 'Calculator',
-  //   node: <Calculator />,
   // },
   '/user-agents': {
     title: 'User Agents of Visitors',

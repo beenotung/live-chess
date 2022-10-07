@@ -47,8 +47,9 @@ export function App(main: Node): Element {
         <h1 class="title">
           Live Four Chain Chess{' '}
           <span>
-            Powered by ts-liveview [
-            <a href="https://github.com/beenotung/ts-liveview">git</a>]
+            [<a href="https://github.com/beenotung/live-chess">git</a>] Powered
+            by{' '}
+            <a href="https://github.com/beenotung/ts-liveview">ts-liveview </a>
           </span>
         </h1>
         {scripts}
