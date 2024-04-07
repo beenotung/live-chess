@@ -9,7 +9,7 @@ import SourceCode from '../components/source-code.js'
 
 let text = readFileSync('README.md').toString()
 
-let html = Raw(marked(text))
+let html = Raw(await marked(text))
 let markdown = <pre style="white-space: break-spaces">{text}</pre>
 markdown = (
   <pre>

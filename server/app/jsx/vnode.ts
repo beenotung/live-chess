@@ -65,6 +65,7 @@ export function nodeToVNode(node: Node, context: Context): VNode {
     case null:
     case undefined:
       return node
+    case true:
     case false:
       return null
   }

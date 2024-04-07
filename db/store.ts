@@ -55,5 +55,5 @@ group by user_agent.id
 `)
 
 export function getUserAgents(): Array<{ user_agent: string; count: number }> {
-  return select_user_agent.all()
+  return select_user_agent.all() as any[]
 }
