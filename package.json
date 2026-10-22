@@ -50,7 +50,6 @@
     "marked": "^12.0.2",
     "open": "^10.2.0",
     "sanitize-html": "^2.18.1",
-    "spdy": "^4.0.2",
     "timezone-date.ts": "^2.1.1",
     "url-router.ts": "^1.2.2",
     "ws": "^8.22.0"
@@ -64,7 +63,6 @@
     "@types/integer": "^4.0.3",
     "@types/node": "^20.19.43",
     "@types/sanitize-html": "^2.16.2",
-    "@types/spdy": "^3.4.9",
     "@types/ws": "^8.18.2",
     "@typescript-eslint/eslint-plugin": "^7.18.0",
     "@typescript-eslint/parser": "^7.18.0",

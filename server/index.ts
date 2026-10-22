@@ -1,5 +1,6 @@
 import express from 'express'
-import spdy from 'spdy'
+import http from 'http'
+import https from 'https'
 import { WebSocketServer } from 'ws'
 import { config } from './config.js'
 import { join } from 'path'
@@ -19,7 +20,9 @@ const log = debugLog('index.ts')
 log.enabled = true
 
 const app = express()
-const server = spdy.createServer(config.serverOptions, app)
+const server = config.tls_options
+  ? https.createServer(config.tls_options, app)
+  : http.createServer(app)
 const wss = new WebSocketServer({ server })
 listenWSSCookie(wss)
 listenWSSConnection({
@@ -62,7 +65,7 @@ app.use(cookieMiddleware)
 app.use(appRouter)
 
 const port = config.port
-const protocol = config.serverOptions.key ? 'https' : 'http'
+const protocol = config.tls_options ? 'https' : 'http'
 server.listen(port, () => {
   print({ port, protocol })
   if (config.development && existsSync('.open')) {

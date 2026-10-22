@@ -1,7 +1,6 @@
 import { config as loadEnv } from 'dotenv'
 import { readFileSync } from 'fs'
 import { populateEnv } from 'populate-env'
-import { ServerOptions } from 'spdy'
 
 loadEnv()
 
@@ -21,13 +20,11 @@ populateEnv(env, { mode: 'halt' })
 
 let behind_proxy = env.BEHIND_HTTPS_PROXY === 'true'
 
-let serverOptions: ServerOptions =
+// null means plain http: either we are behind an https proxy, or the app is
+// configured to serve http/1.1 only
+let tls_options =
   behind_proxy || env.HTTP_VERSION !== 2
-    ? {
-        spdy: {
-          plain: true,
-        },
-      }
+    ? null
     : {
         key: readFileSync(env.HTTPS_KEY_FILE),
         cert: readFileSync(env.HTTPS_CERT_FILE),
@@ -51,5 +48,5 @@ export let config = {
   site_name: 'ts-liveview Demo',
   site_description: 'Demo website of ts-liveview',
   setup_robots_txt: false,
-  serverOptions,
+  tls_options,
 }
